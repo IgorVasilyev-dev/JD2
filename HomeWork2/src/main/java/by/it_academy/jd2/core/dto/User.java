@@ -1,7 +1,6 @@
 package by.it_academy.jd2.core.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 public class User  implements Serializable {
@@ -64,7 +63,7 @@ public class User  implements Serializable {
         return "User{" +
                 "login='" + login + '\'' +
                 ", fio='" + fio + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + hashCode() + '\'' +
                 ", birthDay='" + birthDay + '\'' +
                 '}';
     }

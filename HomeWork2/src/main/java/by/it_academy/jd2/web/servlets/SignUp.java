@@ -1,6 +1,7 @@
 package by.it_academy.jd2.web.servlets;
 
 import by.it_academy.jd2.core.dto.User;
+import by.it_academy.jd2.core.storage.UsersStorage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,9 +14,15 @@ import java.io.IOException;
 @WebServlet(name = "SignUp", urlPatterns = "/signUp")
 public class SignUp extends HttpServlet {
 
+    private final UsersStorage usersStorage;
+
+    public SignUp () {
+        this.usersStorage = UsersStorage.getInstance();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(req.getContextPath() + "/singUp.jsp").forward(req,resp);
+        req.getRequestDispatcher("/signUp.jsp").forward(req,resp);
     }
 
     @Override
@@ -26,12 +33,19 @@ public class SignUp extends HttpServlet {
         String fio = req.getParameter("fio");
         String birthDay = req.getParameter("birthDay");
 
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setFio(fio);
-        user.setBirthDay(birthDay);
-        resp.sendRedirect(req.getContextPath() + "/signIn");
+        if(usersStorage.getUser(login) == null) {
+            User user = new User();
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setFio(fio);
+            user.setBirthDay(birthDay);
+            usersStorage.add(user);
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/");
+        } else {
+            req.setAttribute("error", true);
+            req.setAttribute("errorMessage", "Имя пользователя уже занято");
+            req.getRequestDispatcher("/signUp.jsp").forward(req, resp);
+        }
     }
-
 }

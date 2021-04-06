@@ -4,17 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Message implements Serializable {
-    private String sendText;
     private Date sendDate;
     private String sendFrom;
-
-    public String getSendText() {
-        return sendText;
-    }
-
-    public void setSendText(String sendText) {
-        this.sendText = sendText;
-    }
+    private String sendText;
 
     public Date getSendDate() {
         return sendDate;
@@ -30,5 +22,22 @@ public class Message implements Serializable {
 
     public void setSendFrom(String sendFrom) {
         this.sendFrom = sendFrom;
+    }
+
+    public String getSendText() {
+        return sendText;
+    }
+
+    public void setSendText(String sendText) {
+        this.sendText = sendText;
+    }
+
+    @Override
+    public String toString() {
+        return sendDate + " - от - "
+                + sendFrom + ": "
+                + sendText;
+
+
     }
 }
