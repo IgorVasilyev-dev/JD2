@@ -1,4 +1,4 @@
-package by.it_academy.jd2.core.api;
+package by.it_academy.jd2.core.dao.api;
 
 import java.sql.SQLException;
 import java.util.List;

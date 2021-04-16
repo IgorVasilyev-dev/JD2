@@ -1,19 +1,17 @@
-package by.it_academy.jd2.core;
+package by.it_academy.jd2.core.dto;
 
-import java.util.Date;
+public class Flight {
 
-public class CheckInFlight {
-
-    Date departureDate;
+    String departureDate;
     String departureAirport;
-    Date arrivalDate;
+    String arrivalDate;
     String arrivalAirport;
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -25,11 +23,11 @@ public class CheckInFlight {
         this.departureAirport = departureAirport;
     }
 
-    public Date getArrivalDate() {
+    public String getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
+    public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 

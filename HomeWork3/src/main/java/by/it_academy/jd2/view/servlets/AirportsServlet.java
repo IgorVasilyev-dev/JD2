@@ -1,7 +1,7 @@
 package by.it_academy.jd2.view.servlets;
 
-import by.it_academy.jd2.core.Air;
-import by.it_academy.jd2.core.api.IDao;
+import by.it_academy.jd2.core.dto.Air;
+import by.it_academy.jd2.core.dao.api.IDao;
 import by.it_academy.jd2.core.dao.AirDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

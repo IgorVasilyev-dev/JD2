@@ -4,7 +4,7 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Список Аэропортов</title>
+    <title>Список полетов</title>
     <style>
         table {
             width: 100%; /* Ширина таблицы */
@@ -23,28 +23,29 @@
         }
     </style>
 </head>
-
 <body>
+<c:choose>
+    <c:when test="${requestScope.error}">
+        <p style="color:red;">${requestScope.message}</p>
+    </c:when>
+<c:otherwise>
 <table>
     <thead>
     <h1>Page No: ${requestScope.page} </h1>
     <tr>
-        <th>Код Аэропорта</th>
-        <th>Аэропорт</th>
-        <th>Город</th>
-        <th>Координаты</th>
-        <th>Часавой пояс</th>
+        <th>Дата вылета</th>
+        <th>Аэропорт вылета</th>
+        <th>Дата прибытия</th>
+        <th>Аэропорт прибытия</th>
     </tr>
     </thead>
-
     <tbody>
-    <c:forEach var="list" items="${requestScope.airList}" >
+    <c:forEach var="list" items="${requestScope.flightList}" >
         <tr>
-            <td> ${list.airport_code}</td>
-            <td> ${list.airport_name}</td>
-            <td> ${list.city}</td>
-            <td> ${list.coordinates}</td>
-            <td> ${list.timezone}</td>
+            <td> ${list.departureDate}</td>
+            <td> ${list.departureAirport}</td>
+            <td> ${list.arrivalDate}</td>
+            <td> ${list.arrivalAirport}</td>
         </tr>
     </c:forEach>
     </tbody>
@@ -56,10 +57,11 @@
             <td>${i}</td>
         </c:when>
         <c:otherwise>
-            <td><a href="${pageContext.request.contextPath}/airports?page=${i}">${i}</a></td>
+            <td><a href="${pageContext.request.contextPath}/flight?page=${i}">${i}</a></td>
         </c:otherwise>
     </c:choose>
 </c:forEach>
 </body>
-
+</c:otherwise>
+</c:choose>
 </html>

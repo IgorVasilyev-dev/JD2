@@ -16,8 +16,8 @@ public class DataSourceCreator {
         cpds.setJdbcUrl("jdbc:postgresql://localhost:5432/demo");
         cpds.setUser("postgres");
         cpds.setPassword("Simpat9Lga");
-        cpds.setMinPoolSize(5);
-        cpds.setAcquireIncrement(5);
+        cpds.setMinPoolSize(2);
+        cpds.setAcquireIncrement(2);
         cpds.setMaxPoolSize(20);
         cpds.setMaxStatements(180);
     }
