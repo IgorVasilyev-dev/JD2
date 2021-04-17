@@ -50,13 +50,13 @@
     </tbody>
 </table>
 <br>
-<c:forEach begin="1" end="${requestScope.pageN}" var="i">
+<c:forEach begin="1" end="${sessionScope.pageN}" var="i">
     <c:choose>
         <c:when test="${requestScope.page eq i}">
-            <td>${i}</td>
+            ${i}
         </c:when>
         <c:otherwise>
-            <td><a href="${pageContext.request.contextPath}/airports?page=${i}">${i}</a></td>
+            <a href="${pageContext.request.contextPath}/airports?page=${i}">${i}</a>
         </c:otherwise>
     </c:choose>
 </c:forEach>

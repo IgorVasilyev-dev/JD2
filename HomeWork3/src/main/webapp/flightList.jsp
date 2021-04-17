@@ -24,6 +24,7 @@
     </style>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/flight">Вернуться на страницу поиска</a>
 <c:choose>
     <c:when test="${requestScope.error}">
         <p style="color:red;">${requestScope.message}</p>
@@ -51,13 +52,13 @@
     </tbody>
 </table>
 <br>
-<c:forEach begin="1" end="${requestScope.pageN}" var="i">
+<c:forEach begin="1" end="${sessionScope.pageN}" var="i">
     <c:choose>
         <c:when test="${requestScope.page eq i}">
-            <td>${i}</td>
+            ${i}
         </c:when>
         <c:otherwise>
-            <td><a href="${pageContext.request.contextPath}/flight?page=${i}">${i}</a></td>
+            <a href="${pageContext.request.contextPath}/flightList?page=${i}">${i}</a>
         </c:otherwise>
     </c:choose>
 </c:forEach>

@@ -19,17 +19,16 @@ import java.util.List;
 @WebServlet(name ="FlightSelectServlet", urlPatterns = "/flight")
 public class FlightSelectServlet extends HttpServlet {
 
-    private static final int TOTAL = 25;
+    private static final int TOTAL_LIST_VALUE = 25;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-
         if (session.getAttribute("airList") == null) {
             try {
                 IDao<Air> airDao = new AirDao();
-                List<Air> airList = airDao.getRecords(1, airDao.getCount());
+                List<Air> airList = airDao.getRecords(0, airDao.getCount());
                 session.setAttribute("airList", airList);
             } catch (PropertyVetoException | SQLException e) {
                 e.printStackTrace();
@@ -41,38 +40,28 @@ public class FlightSelectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int total = 25, n, pageId;
+        int n;
+
+        HttpSession session = req.getSession();
 
         String depAir = req.getParameter("departureAirport");
         String scDep = req.getParameter("departureDate");
         String arrAir = req.getParameter("arrivalAirport");
         String scArr = req.getParameter("arrivalDate");
 
-        if (req.getParameter("page") == null || req.getParameter("page").isEmpty()) {
-            pageId = 1;
-        } else {
-            pageId = Integer.parseInt(req.getParameter("page"));
-        }
-
-        if (pageId < 1) {
-            pageId = 1;
-        } else if (pageId > 1) {
-            pageId = pageId - 1;
-            pageId = pageId * total + 1;
-        }
-
         try {
             IDao<Flight> flightDao = new FlightDao(depAir, scDep, arrAir, scArr);
-            List<Flight> flightList = flightDao.getRecords(pageId, TOTAL);
-            n = 1 + flightDao.getCount() / total;
-            if (flightList.isEmpty()) {
+            n = 1 + flightDao.getCount() / TOTAL_LIST_VALUE;
+            List<Flight> list = flightDao.getRecords(0, TOTAL_LIST_VALUE);
+            if (list.isEmpty()) {
                 req.setAttribute("error", true);
                 req.setAttribute("message", "По вашему запросу ничего не найдено");
             } else {
-                req.setAttribute("flightList", flightList);
+                req.setAttribute("flightList", list);
             }
+            session.setAttribute("flightDao", flightDao);
+            session.setAttribute("pageN", n);
             req.setAttribute("page", 1);
-            req.setAttribute("pageN", n);
             req.getRequestDispatcher("flightList.jsp").forward(req, resp);
         } catch (PropertyVetoException | SQLException e) {
             e.printStackTrace();

@@ -7,8 +7,7 @@
 <title>HomePage</title>
 </head>
 <body>
-    <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/airports?page=1';" value="Просмотреть список аэропортов" /></p>
+    <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/airports';" value="Просмотреть список аэропортов" /></p>
     <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/flight';" value="Просмотреть список полетов" /></p>
 </body>
-
 </html>
