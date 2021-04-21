@@ -34,10 +34,10 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return sendDate + " - от - "
-                + sendFrom + ": "
-                + sendText;
-
-
+        return "Message{" +
+                "sendDate=" + sendDate +
+                ", sendFrom='" + sendFrom + '\'' +
+                ", sendText='" + sendText + '\'' +
+                '}';
     }
 }

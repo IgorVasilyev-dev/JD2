@@ -2,8 +2,7 @@ package by.it_academy.jd2.core.storage;
 
 import by.it_academy.jd2.core.dto.User;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UsersStorage {
 
@@ -24,6 +23,13 @@ public class UsersStorage {
     }
 
     public void add(User user) {
+        if (this.users.containsKey(user.getLogin())) {
+            throw new IllegalArgumentException("Пользователь с таким именем уже существует");
+    }
         this.users.put(user.getLogin(), user);
+    }
+
+    public Collection<User> getALL () {
+        return this.users.values();
     }
 }

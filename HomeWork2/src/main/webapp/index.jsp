@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
@@ -15,7 +15,7 @@
         <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/signIn';" value="Войти" /></p>
     </c:when>
     <c:otherwise>
-        <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/chatServlet';" value="Просмотреть чат" /></p>
+        <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/message';" value="Оправить сообщение" /></p>
     </c:otherwise>
 </c:choose>
 </body>
