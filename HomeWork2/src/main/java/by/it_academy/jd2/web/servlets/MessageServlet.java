@@ -1,6 +1,8 @@
 package by.it_academy.jd2.web.servlets;
 
+import by.it_academy.jd2.core.dto.Message;
 import by.it_academy.jd2.core.dto.User;
+import by.it_academy.jd2.view.MessageService;
 import by.it_academy.jd2.view.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,25 +11,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @WebServlet(name = "MessageServlet", urlPatterns = "/message")
 public class MessageServlet extends HttpServlet {
 
+    private final MessageService messageService;
     private final UserService userService;
 
     public MessageServlet() {
+        this.messageService = MessageService.getInstance();
         this.userService = UserService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> list = new ArrayList<>();
-        for (User e: userService.getAll()) {
-            list.add(e.getLogin());
-        }
-        req.setAttribute("allUsers", list);
+
+        req.setAttribute("allUsers", userService.getAllLogin());
         req.getRequestDispatcher("message.jsp").forward(req, resp);
     }
 
@@ -37,20 +37,28 @@ public class MessageServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
 
         if (user == null) {
-            throw new SecurityException("Ошибка безопасности");
-        }
-
-        String message = req.getParameter("msg");
-        String recipient = req.getParameter("recipient");
-        String sender = user.getLogin();
-
-        try {
-
-            System.out.println("над этим еще надо поработать");
-        } catch (IllegalArgumentException e) {
             req.setAttribute("error", true);
-            req.setAttribute("message", e.getMessage());
+            req.setAttribute("message", "Пожалуйста выполните авторизацию");
+            req.getRequestDispatcher("signIn.jsp").forward(req, resp);
+        } else {
+            String msg = req.getParameter("msg");
+            String recipient = req.getParameter("recipient");
+            String sender = user.getLogin();
+
+            Message message = new Message();
+            message.setSentFrom(sender);
+            message.setSendText(msg);
+            message.setSendDate(new Date());
+
+            try {
+                messageService.addMessage(recipient,message);
+                req.setAttribute("allUsers", userService.getAllLogin());
+                req.setAttribute("success", true);
+            } catch (IllegalArgumentException | SecurityException e) {
+                req.setAttribute("error", true);
+                req.setAttribute("message", e.getMessage());
+            }
+            req.getRequestDispatcher("message.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("message.jsp").forward(req, resp);
     }
 }

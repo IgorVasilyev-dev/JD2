@@ -31,5 +31,6 @@
             <input type="submit" value="Войти">
         </div>
     </form>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/signUp';" value="Зарегистрироваться" /></p>
 </body>
 </html>

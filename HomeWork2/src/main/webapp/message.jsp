@@ -4,15 +4,23 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Отправте сообщение</title>
+    <style>
+        label {
+            display: inline-block;
+        }
+    </style>
+    <title>Чат</title>
 </head>
 <body>
 <c:choose>
     <c:when test="${requestScope.error}">
         <p style="color:red;"> ${requestScope.message} </p>
     </c:when>
+    <c:when test="${requestScope.success}">
+        <p style="color:blue;">Сообщение успешно отправлено</p>
+    </c:when>
     <c:otherwise>
-        <h3>Страница авторизации</h3>
+        <h3>Страница отправки сообщений</h3>
     </c:otherwise>
 </c:choose>
 <form method="POST" action="${pageContext.request.contextPath}/message">
@@ -27,12 +35,12 @@
                         </c:forEach>
                     </select>
                 </label></td>
-                <td> Сообщение: <label> <input type="text" name="msg"> </label> </td>
+                <td> Сообщение: <label > <input type="text" name="msg"> </label> </td>
+                <td> <input type="submit" value="Отправить"> </td>
             </tr>
         </table>
-        <br>
-        <input type="submit" value="Отправить сообщение">
     </div>
 </form>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp';" value="HomePage" /></p>
 </body>
 </html>

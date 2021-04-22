@@ -9,6 +9,10 @@ public class AuthUser {
     private final UserService userService;
     private static AuthUser instance;
 
+    /**
+     * pattern singleton
+     * @return new new AuthUser() если instance == null
+     */
     public static AuthUser getInstance () {
         if(instance == null) {
             instance = new AuthUser();
@@ -20,6 +24,12 @@ public class AuthUser {
         this.userService = UserService.getInstance();
     }
 
+    /**
+     * Метод проверки параметров login & password объекта user из коллекции c параметрам login & password
+     * @param login параметр
+     * @param password параметр
+     * @return возвращает объект user если параметры эдентичны, иначе - null
+     */
     public User checkAuthUser (String login, String password) {
         User user = this.userService.getUser(login);
         if (user == null) {

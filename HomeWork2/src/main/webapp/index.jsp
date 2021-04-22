@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 
-<html>
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Index</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HomePage</title>
 </head>
 <body>
 <c:choose>
@@ -16,6 +15,7 @@
     </c:when>
     <c:otherwise>
         <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/message';" value="Оправить сообщение" /></p>
+        <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/chat';" value="Просмотреть сообщения" /></p>
     </c:otherwise>
 </c:choose>
 </body>

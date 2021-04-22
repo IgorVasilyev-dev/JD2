@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Message implements Serializable {
+
     private Date sendDate;
-    private String sendFrom;
+    private String sentFrom;
     private String sendText;
 
     public Date getSendDate() {
@@ -16,12 +17,12 @@ public class Message implements Serializable {
         this.sendDate = sendDate;
     }
 
-    public String getSendFrom() {
-        return sendFrom;
+    public String getSentFrom() {
+        return sentFrom;
     }
 
-    public void setSendFrom(String sendFrom) {
-        this.sendFrom = sendFrom;
+    public void setSentFrom(String sentFrom) {
+        this.sentFrom = sentFrom;
     }
 
     public String getSendText() {
@@ -36,7 +37,7 @@ public class Message implements Serializable {
     public String toString() {
         return "Message{" +
                 "sendDate=" + sendDate +
-                ", sendFrom='" + sendFrom + '\'' +
+                ", sentFrom='" + sentFrom + '\'' +
                 ", sendText='" + sendText + '\'' +
                 '}';
     }
