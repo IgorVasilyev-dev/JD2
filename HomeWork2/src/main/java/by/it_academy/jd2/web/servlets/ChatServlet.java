@@ -1,7 +1,6 @@
 package by.it_academy.jd2.web.servlets;
 
 import by.it_academy.jd2.core.dto.User;
-import by.it_academy.jd2.core.storage.MessagesStorage;
 import by.it_academy.jd2.view.MessageService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

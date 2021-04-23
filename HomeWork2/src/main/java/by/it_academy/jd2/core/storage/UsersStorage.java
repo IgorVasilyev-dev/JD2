@@ -48,9 +48,6 @@ public class UsersStorage {
      * Получить всю коллекции users
      * @return занчения коллекции users
      */
-    public Collection<User> getALL () {
-        return this.users.values();
-    }
 
     public HashSet<String> getAllLogin () {
         return usersLogin;

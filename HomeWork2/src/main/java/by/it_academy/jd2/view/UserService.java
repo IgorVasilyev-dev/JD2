@@ -3,7 +3,6 @@ package by.it_academy.jd2.view;
 import by.it_academy.jd2.core.dto.User;
 import by.it_academy.jd2.core.storage.UsersStorage;
 
-import java.util.Collection;
 import java.util.HashSet;
 
 public class UserService {
@@ -70,10 +69,6 @@ public class UserService {
      */
     public User getUser (String login) {
         return this.usersStorage.getUser(login);
-    }
-
-    public Collection<User> getAll () {
-        return this.usersStorage.getALL();
     }
 
     /**

@@ -19,16 +19,21 @@
         <h3>Страница чата</h3>
     </c:otherwise>
 </c:choose>
-<table>
-    <c:forEach var="list" items="${requestScope.allMessage}" >
-        <tr>
-            <td>(${list.sendDate})</td>
-            <td>Сообщение от: </td>
-            <td>${list.sentFrom}</td>
-            <td> --> ${list.sendText}</td>
-        </tr>
-    </c:forEach>
-</table>
+<c:choose>
+    <c:when test="${empty(requestScope.allMessage)}">Нет входящих сообщений</c:when>
+    <c:otherwise>
+    <table>
+        <c:forEach var="list" items="${requestScope.allMessage}" >
+            <tr>
+                <td>(${list.sendDate})</td>
+                <td>Сообщение от: </td>
+                <td>${list.sentFrom}</td>
+                <td> --> ${list.sendText}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    </c:otherwise>
+</c:choose>
 <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp';" value="HomePage" /></p>
 </body>
 </html>
