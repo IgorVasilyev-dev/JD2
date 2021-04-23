@@ -37,6 +37,8 @@ public class MessageService {
 
     /**
      * Метод добовляет message в messagesStorage
+     * @param recipient получатель
+     * @param message текст
      */
     public void addMessage (String recipient, Message message) {
         this.formValidation(message);
@@ -46,7 +48,7 @@ public class MessageService {
     /**
      * получает список по ключу user
      * @param user ключ
-     * @return список List<Message> объекта user
+     * @return список message объекта user
      */
     public List<Message> getList (User user) {
         return this.messagesStorage.getList(user.getLogin());

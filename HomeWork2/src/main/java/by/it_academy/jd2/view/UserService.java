@@ -27,6 +27,7 @@ public class UserService {
 
     /**
      * Метод проверяет объект user и добовляет его в userStorage
+     * @param user объект класса User
      */
     public void checkUser (User user) {
         this.formValidation(user);

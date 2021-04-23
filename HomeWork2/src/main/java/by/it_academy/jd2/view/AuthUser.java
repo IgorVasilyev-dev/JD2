@@ -25,7 +25,7 @@ public class AuthUser {
     }
 
     /**
-     * Метод проверки параметров login & password объекта user из коллекции c параметрам login & password
+     * Метод проверки параметров login и password объекта user из коллекции c параметрам login и password
      * @param login параметр
      * @param password параметр
      * @return возвращает объект user если параметры эдентичны, иначе - null

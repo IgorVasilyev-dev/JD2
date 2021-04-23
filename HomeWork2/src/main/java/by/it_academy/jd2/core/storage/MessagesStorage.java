@@ -24,16 +24,16 @@ public class MessagesStorage {
     }
 
     /**
-     * получаем список List<Message> из chat по ключу login
+     * получаем список из chat по ключу login
      * @param login ключ
-     * @return List<Message>
+     * @return список
      */
     public List<Message> getList(String login) {
         return chat.get(login);
     }
 
     /**
-     * метод добовляет message в List<Message> полученный из chat по ключу login, если списка не сущесвует -
+     * метод добовляет message в список полученный из chat по ключу login, если списка не сущесвует -
      * созает новый список и добовляет его в chat с ключом login
      * @param login ключ
      * @param message объект типа Message
