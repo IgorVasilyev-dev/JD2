@@ -15,25 +15,22 @@ import java.util.List;
 
 public class MessagesStorage implements IDaoMessage<Message> {
 
-
     private static Connection connection;
     private static MessagesStorage instance;
 
-    static {
-        try {
-            DataSource dataSource = DataSourceCreator.getInstance();
-            connection = dataSource.getConnection();
-        } catch (PropertyVetoException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * singleton pattern
+     * получаем коннект к БД
      * @return new MessagesStorage() если instance == null
      */
     public static MessagesStorage getInstance() {
         if (instance == null) {
+            try {
+                DataSource dataSource = DataSourceCreator.getInstance();
+                connection = dataSource.getConnection();
+            } catch (PropertyVetoException | SQLException e) {
+                e.printStackTrace();
+            }
             instance = new MessagesStorage();
         }
         return instance;

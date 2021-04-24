@@ -29,7 +29,6 @@
             <tr>
                 <td> <label> Кому:
                     <select name="recipient">
-                        <option> Всем </option>
                         <c:forEach var="list" items="${requestScope.allUsers}">
                             <option> ${list}</option>
                         </c:forEach>
@@ -41,6 +40,7 @@
         </table>
     </div>
 </form>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/chat';" value="Просмотреть сообщения" /></p>
 <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp';" value="HomePage" /></p>
 </body>
 </html>

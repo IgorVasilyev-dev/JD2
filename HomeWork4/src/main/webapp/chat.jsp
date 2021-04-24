@@ -34,6 +34,7 @@
     </table>
     </c:otherwise>
 </c:choose>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/message';" value="написать сообщение" /></p>
 <p><input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp';" value="HomePage" /></p>
 </body>
 </html>

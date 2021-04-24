@@ -38,9 +38,9 @@ public class UsersStorage implements IDaoUser<User>{
     }
 
     /**
-     * Метод получения коллекцию значении login из БД
+     * Получаем коллекцию значении login из БД при инициализации класса
      * полчуем коллекцию из БД, если коллекция usersLogin == null
-     * @return занчения коллекции usersLogin
+     * @return коллекцию usersLogin
      */
     public static HashSet<String> getAllLogin () {
         if (usersLogin == null) {
@@ -95,7 +95,7 @@ public class UsersStorage implements IDaoUser<User>{
     }
 
     /**
-     * Метод добовляет объект user в БД
+     * Метод добовляет объект user в БД, а также значение login объекта user в коллекцию usersLogin
      * @param user объект класса User
      */
     @Override
@@ -108,7 +108,6 @@ public class UsersStorage implements IDaoUser<User>{
             ps.setString(3, user.getFio());
             ps.setString(4, user.getBirthDay());
             ps.executeUpdate();
-            ps.close();
             addLogin(user.getLogin());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
