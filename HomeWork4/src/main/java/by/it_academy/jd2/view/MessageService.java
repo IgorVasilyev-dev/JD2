@@ -4,7 +4,6 @@ import by.it_academy.jd2.core.dto.Message;
 import by.it_academy.jd2.core.dto.User;
 import by.it_academy.jd2.core.storage.MessagesStorage;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MessageService {
@@ -40,9 +39,8 @@ public class MessageService {
      * Метод добовляет message в messagesStorage
      * @param recipient получатель
      * @param message текст
-     * @throws SQLException An exception that provides information on a database access error or other errors.
      */
-    public void addMessage(String recipient, Message message) throws SQLException {
+    public void addMessage(String recipient, Message message) {
         this.formValidation(message);
         this.messagesStorage.add(message,recipient);
     }
@@ -51,9 +49,8 @@ public class MessageService {
      * получает список по ключу user
      * @param user ключ
      * @return список message объекта user
-     * @throws SQLException An exception that provides information on a database access error or other errors.
      */
-    public List<Message> getList (User user) throws SQLException {
+    public List<Message> getList (User user) {
         return this.messagesStorage.getList(user.getLogin());
     }
 

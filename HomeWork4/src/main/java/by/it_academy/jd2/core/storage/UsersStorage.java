@@ -88,8 +88,8 @@ public class UsersStorage implements IDaoUser<User>{
                 user.setBirthDay(rs.getString(4));
             }
             rs.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return user;
     }
@@ -109,8 +109,8 @@ public class UsersStorage implements IDaoUser<User>{
             ps.setString(4, user.getBirthDay());
             ps.executeUpdate();
             addLogin(user.getLogin());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

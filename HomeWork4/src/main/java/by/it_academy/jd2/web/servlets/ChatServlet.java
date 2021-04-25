@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "ChatServlet", urlPatterns = "/chat")
 public class ChatServlet extends HttpServlet {
@@ -30,11 +29,7 @@ public class ChatServlet extends HttpServlet {
             req.setAttribute("message", "Пожалуйста выполните авторизацию");
             req.getRequestDispatcher("signIn.jsp").forward(req, resp);
         } else {
-            try {
-                req.setAttribute("allMessage", messageService.getList(user));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            req.setAttribute("allMessage", messageService.getList(user));
             req.getRequestDispatcher("chat.jsp").forward(req, resp);
         }
     }

@@ -11,8 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Date;
 
 @WebServlet(name = "MessageServlet", urlPatterns = "/message")
 public class MessageServlet extends HttpServlet {
@@ -54,7 +52,7 @@ public class MessageServlet extends HttpServlet {
                 messageService.addMessage(recipient,message);
                 req.setAttribute("allUsers", userService.getAllLogin());
                 req.setAttribute("success", true);
-            } catch (IllegalArgumentException | SecurityException | SQLException e) {
+            } catch (IllegalArgumentException e) {
                 req.setAttribute("error", true);
                 req.setAttribute("message", e.getMessage());
             }

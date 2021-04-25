@@ -2,7 +2,6 @@ package by.it_academy.jd2.view;
 
 import by.it_academy.jd2.core.dto.User;
 
-import java.sql.SQLException;
 import java.util.Objects;
 
 public class AuthUser {
@@ -31,9 +30,8 @@ public class AuthUser {
      * @param login параметр
      * @param password параметр
      * @return возвращает объект user если параметры эдентичны, иначе - null
-     * @throws SQLException An exception that provides information on a database access error or other errors.
      */
-    public User checkAuthUser (String login, String password) throws SQLException {
+    public User checkAuthUser (String login, String password) {
         if(this.userService.getAllLogin().contains(login)) {
             User user = this.userService.getUser(login);
             if (user == null) {

@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "SignUpServlet", urlPatterns = "/signUp")
 public class SignUpServlet extends HttpServlet {
@@ -20,7 +19,6 @@ public class SignUpServlet extends HttpServlet {
     public SignUpServlet() {
         this.userService = UserService.getInstance();
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,7 +44,7 @@ public class SignUpServlet extends HttpServlet {
             this.userService.checkUser(user);
             session.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/");
-        } catch (IllegalArgumentException | SQLException e) {
+        } catch (IllegalArgumentException e) {
             req.setAttribute("error", true);
             req.setAttribute("message", e.getMessage());
             req.getRequestDispatcher("/signUp.jsp").forward(req, resp);

@@ -3,7 +3,6 @@ package by.it_academy.jd2.view;
 import by.it_academy.jd2.core.dto.User;
 import by.it_academy.jd2.core.storage.UsersStorage;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 
 public class UserService {
@@ -29,11 +28,14 @@ public class UserService {
     /**
      * Метод проверяет объект user и добовляет его в userStorage
      * @param user объект класса User
-     * @throws SQLException An exception that provides information on a database access error or other errors.
      */
-    public void checkUser (User user) throws SQLException {
+    public void checkUser (User user) {
         this.formValidation(user);
-        this.usersStorage.add(user);
+        if (UsersStorage.getAllLogin().contains(user.getLogin())) {
+            throw new IllegalArgumentException("Этот логин уже занят");
+        } else {
+            this.usersStorage.add(user);
+        }
     }
 
     /**

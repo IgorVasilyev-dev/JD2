@@ -1,7 +1,6 @@
 package by.it_academy.jd2.core.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Message implements Serializable {
 

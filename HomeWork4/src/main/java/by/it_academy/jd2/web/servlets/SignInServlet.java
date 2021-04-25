@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "SignInServlet", urlPatterns = "/signIn")
 public class SignInServlet extends HttpServlet {
@@ -42,7 +41,7 @@ public class SignInServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 resp.sendRedirect(req.getContextPath() + "/");
             }
-        } catch (IllegalArgumentException | SQLException e) {
+        } catch (IllegalArgumentException e) {
             req.setAttribute("error", true);
             req.setAttribute("message", e.getMessage());
             req.getRequestDispatcher("/signIn.jsp").forward(req, resp);
