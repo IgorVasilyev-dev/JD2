@@ -16,10 +16,20 @@ public class AirDao implements IDao<Air> {
 
     private static DataSource dataSource;
 
-    public AirDao() throws PropertyVetoException, SQLException {
+    /**
+     * конструктор без параметров, по умолчанию получает dataSource из DataSourceCreator
+     * @throws PropertyVetoException исключение возникате при недопустимом значении dataSource
+     */
+    public AirDao() throws PropertyVetoException {
          dataSource = DataSourceCreator.getInstance();
     }
 
+    /**
+     * Получить записи из БД
+     * @param start параметр получения начальной записи
+     * @param total количесвто получаемых записей
+     * @return список
+     */
     @Override
     public  List<Air> getRecords(int start, int total) {
         List<Air> list = new ArrayList<>();
@@ -30,7 +40,7 @@ public class AirDao implements IDao<Air> {
                             "   ml.city ->> 'ru' AS city,\n" +
                             "   ml.coordinates,\n" +
                             "   ml.timezone\n" +
-                            "   FROM bookings.airports_data ml ORDER BY city LIMIT " + total + "OFFSET " + start);
+                            "   FROM bookings.airports_data ml ORDER BY city LIMIT " + total + " OFFSET " + start);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -49,6 +59,10 @@ public class AirDao implements IDao<Air> {
         return list;
     }
 
+    /**
+     * Получить количество записей
+     * @return количество записей
+     */
     @Override
     public int getCount() {
         int count = 0;

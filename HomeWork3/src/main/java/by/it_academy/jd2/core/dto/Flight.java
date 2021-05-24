@@ -1,11 +1,13 @@
 package by.it_academy.jd2.core.dto;
 
-public class Flight {
+import java.io.Serializable;
 
-    String departureDate;
-    String departureAirport;
-    String arrivalDate;
-    String arrivalAirport;
+public class Flight implements Serializable {
+
+    private String departureDate;
+    private String departureAirport;
+    private String arrivalDate;
+    private String arrivalAirport;
 
     public String getDepartureDate() {
         return departureDate;

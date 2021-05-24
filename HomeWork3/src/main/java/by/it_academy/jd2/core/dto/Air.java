@@ -1,12 +1,14 @@
 package by.it_academy.jd2.core.dto;
 
-public class Air {
+import java.io.Serializable;
 
-    String airport_code;
-    String airport_name;
-    String city;
-    String coordinates;
-    String timezone;
+public class Air implements Serializable {
+
+    private String airport_code;
+    private String airport_name;
+    private String city;
+    private String coordinates;
+    private String timezone;
 
     public String getAirport_code() {
         return airport_code;

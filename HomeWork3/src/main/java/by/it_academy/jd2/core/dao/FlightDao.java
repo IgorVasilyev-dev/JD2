@@ -20,6 +20,14 @@ public class FlightDao implements IDao<Flight> {
     private final String scDep;
     private final String scArr;
 
+    /**
+     * конструктор с параметрами, по умолчанию получает dataSource из DataSourceCreator
+     * @param depAir аэропорт вылета
+     * @param scDep дата вылета
+     * @param arrAir аэропорт вылета
+     * @param scArr дата вылета
+     * @throws PropertyVetoException исключение возникате при недопустимом значении dataSource
+     */
     public FlightDao(String depAir, String scDep, String arrAir, String scArr) throws PropertyVetoException {
 
         if (!scDep.isEmpty()) {
@@ -36,7 +44,12 @@ public class FlightDao implements IDao<Flight> {
         this.scArr = scArr;
     }
 
-    @SuppressWarnings("SqlResolve")
+    /**
+     * Получить записи из БД
+     * @param start параметр получения начальной записи
+     * @param total количесвто получаемых записей
+     * @return список
+     */
     @Override
     public List<Flight> getRecords(int start, int total) {
         List<Flight> list = new ArrayList<>();
@@ -78,7 +91,10 @@ public class FlightDao implements IDao<Flight> {
         return list;
     }
 
-    @SuppressWarnings("SqlResolve")
+    /**
+     * Получить количесвто записей
+     * @return количество записей
+     */
     @Override
     public int getCount() {
         int count = 0;
