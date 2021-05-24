@@ -16,6 +16,13 @@ public class FlightHDao implements IDao<Flight>{
     private final String scDep;
     private final String scArr;
 
+    /**
+     * конструктор с параметрами, по умолчанию получает сессию из HibernateCreator
+     * @param depAir аэропорт оправления
+     * @param scDep дата отвправления
+     * @param arrAir аэропорт прибытия
+     * @param scArr дата прибытия
+     */
     public FlightHDao(String depAir, String scDep, String arrAir, String scArr) {
 
         if (!scDep.isEmpty()) {
@@ -32,6 +39,13 @@ public class FlightHDao implements IDao<Flight>{
         this.scArr = scArr;
     }
 
+    /**
+     * Получить записи из БД
+     * @param start номер начальной записи
+     * @param total количество записей
+     * @return список
+     * @throws SQLException An exception that provides information on a database access error or other errors
+     */
     @Override
     public List<Flight> getRecords(int start, int total) throws SQLException {
         Query<Flight> query  = session.createQuery("FROM flights \n" +
@@ -44,6 +58,10 @@ public class FlightHDao implements IDao<Flight>{
         return query.list();
     }
 
+    /**
+     * Получить количество записей из БД
+     * @return количесвто записей
+     */
     @Override
     public int getCount() {
         return session.createQuery("FROM flights \n" +

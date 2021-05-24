@@ -16,14 +16,21 @@ public class StorageService {
 
     public static StorageService instance;
 
+    /**
+     * Получить экземпляр класса
+     * @return instance
+     */
     public static StorageService getInstance() {
-        if(instance == null) {
+        if(instance == null || airList == null) {
             addRows();
             return new StorageService();
         }
         return instance;
     }
 
+    /**
+     * метод добавляет записи в поле airList и airport
+     */
     private static void addRows() {
             try {
                 IDao<Air> airIDao = new AirDao();
@@ -36,10 +43,20 @@ public class StorageService {
             }
     }
 
+    /**
+     * Получить код аэропорта по ключу
+     * @param airportName ключ
+     * @return код аэропорта
+     */
     public String getAirportCode (String airportName) {
         return airport.get(airportName);
     }
 
+    /**
+     * Получить имя аэропорта по ключу
+     * @param airportCode ключ
+     * @return имя аэропорта
+     */
     public String getAirportName (String airportCode) {
         String name = "";
         Optional<String> result = airport.entrySet()
@@ -54,10 +71,18 @@ public class StorageService {
         return name;
     }
 
+    /**
+     * получить значение поля airList
+     * @return airList
+     */
     public List<Air> getAirList() {
         return airList;
     }
 
+    /**
+     * Метод меняет значения в списке
+     * @param flightList список
+     */
     public void transList(List<Flight> flightList) {
         for (Flight e:flightList) {
             e.setDepartureAirport(getAirportName(e.getDepartureAirport()));
