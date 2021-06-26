@@ -1,0 +1,72 @@
+CREATE DATABASE messengers
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Russian_Russia.1251'
+    LC_CTYPE = 'Russian_Russia.1251'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+---------------------------------------------------------------------------
+
+    CREATE SCHEMA chat
+        AUTHORIZATION postgres;
+
+
+-----------message.Table---------------------
+ CREATE TABLE chat.message
+ (
+     sent_from character varying(25) COLLATE pg_catalog."default" NOT NULL,
+     send_date timestamp without time zone NOT NULL,
+     send_text text COLLATE pg_catalog."default" NOT NULL,
+     recipient character varying(41) COLLATE pg_catalog."default" NOT NULL,
+     message_id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+     CONSTRAINT from_sent FOREIGN KEY (sent_from)
+         REFERENCES chat."user" (login) MATCH SIMPLE
+         ON UPDATE NO ACTION
+         ON DELETE NO ACTION,
+     CONSTRAINT recipient FOREIGN KEY (recipient)
+         REFERENCES chat."user" (login) MATCH SIMPLE
+         ON UPDATE NO ACTION
+         ON DELETE NO ACTION
+         NOT VALID
+ )
+
+ TABLESPACE pg_default;
+
+ ALTER TABLE chat.message
+     OWNER to postgres;
+ -- Index: fki_recipient
+
+ -- DROP INDEX chat.fki_recipient;
+
+ CREATE INDEX fki_recipient
+     ON chat.message USING btree
+     (recipient COLLATE pg_catalog."default" ASC NULLS LAST)
+     TABLESPACE pg_default;
+ -- Index: fki_sent_from
+
+ -- DROP INDEX chat.fki_sent_from;
+
+ CREATE INDEX fki_sent_from
+     ON chat.message USING btree
+     (sent_from COLLATE pg_catalog."default" ASC NULLS LAST)
+     TABLESPACE pg_default;
+
+
+-----------user.Table---------------------------------------------------
+CREATE TABLE chat."user"
+(
+    login character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(41) COLLATE pg_catalog."default" NOT NULL,
+    fio character varying(41) COLLATE pg_catalog."default" NOT NULL,
+    birthday character varying COLLATE pg_catalog."default",
+    CONSTRAINT user_pkey PRIMARY KEY (login)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE chat."user"
+    OWNER to postgres;
+
+---------------------------------------------------------------------------
