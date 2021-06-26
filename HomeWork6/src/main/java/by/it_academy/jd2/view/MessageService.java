@@ -15,7 +15,6 @@ public class MessageService implements IMessageService {
         this.repository = repository;
     }
 
-
     /**
      * Метод проверки значений на null or empty
      * @param val передоваемый параметр
@@ -39,7 +38,6 @@ public class MessageService implements IMessageService {
      */
     @Override
     public List<Message> getList (User user) {
-        System.out.println("мы в сервисе получаем гетЛист");
         return this.repository.findAllByRecipient(user.getLogin());
     }
 

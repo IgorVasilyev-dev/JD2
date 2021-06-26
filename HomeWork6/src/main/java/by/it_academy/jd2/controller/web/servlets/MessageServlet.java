@@ -23,10 +23,7 @@ public class MessageServlet {
 
     @GetMapping
     protected String getAllUsers(Model model){
-
-        System.out.println("мы в месСервлете в гет");
         model.addAttribute("allUsers", userService.getAllLogin());
-        System.out.println("получили объекты allLogin");
         return "/views/message.jsp";
     }
 
@@ -35,21 +32,15 @@ public class MessageServlet {
                             @RequestParam(name = "msg" ) String msg,
                             Model model) {
 
-        System.out.println("мы в мессСервлете в пост");
         User user = (User) model.getAttribute("user");
-        System.out.println("получили юзера из сесии = " + user);
 
         if (user == null) {
             model.addAttribute("error", true);
             model.addAttribute("message", "Пожалуйста выполните авторизацию");
             return "/views/signIn.jsp";
         } else {
-            System.out.println("создаем сообщение");
             Message message = new Message();
             message.setSentFrom(user.getLogin());
-
-//            java.sql.Timestamp sqlTS = new java.sql.Timestamp((new java.util.Date()).getTime());
-//            message.setSendDate(sqlTS);
             message.setSendText(msg);
             message.setRecipient(recipient);
 

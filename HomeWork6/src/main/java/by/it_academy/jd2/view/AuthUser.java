@@ -11,7 +11,6 @@ public class AuthUser implements IAuthUser {
     private final IUserService userService;
 
     public AuthUser(IUserService userService) {
-        System.out.println("попали в конструктор");
         this.userService = userService;
     }
 
@@ -24,11 +23,7 @@ public class AuthUser implements IAuthUser {
      */
     @Override
     public User checkAuthUser (String login, String password) {
-        System.out.println("мы в чек юзер c param = " + login + " " + password );
-        System.out.println("весь список = " + userService.getAllLogin());
-        System.out.println(userService.getUser("igor"));
         if(this.userService.getAllLogin().contains(login)) {
-            System.out.println("проверяем сет на логин");
             User user = this.userService.getUser(login);
             if (user == null) {
                 return null;
@@ -36,10 +31,8 @@ public class AuthUser implements IAuthUser {
             if (!Objects.equals(user.getPassword(), password)) {
                 return null;
             }
-            System.out.println("возвращаем юзера");
             return user;
         }
-        System.out.println("вернем null");
         return null;
     }
 }

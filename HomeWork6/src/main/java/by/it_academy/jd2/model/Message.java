@@ -1,46 +1,39 @@
 package by.it_academy.jd2.model;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity(name = "Message")
 @Table(name = "message", schema = "chat")
 public class Message implements Serializable {
 
     @Id
-    @Generated(GenerationTime.NEVER)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "message_id", nullable = false)
+    private Long messageId;
+
     @Column(name = "sent_from")
     private String sentFrom;
 
-    @Column(name = "send_date")
-    private String sendDate;
+    @CreationTimestamp
+    @Column(name = "send_date", nullable = false)
+    private Timestamp sendDate;
 
     @Column(name = "send_text")
     private String sendText;
 
     @Column(name = "recipient")
-    public String getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
-    }
-
     private String recipient;
 
-    public String getSendDate() {
-        return sendDate;
+    public Long getMessageId() {
+        return messageId;
     }
 
-    public void setSendDate(String sendDate) {
-        this.sendDate = sendDate;
+    public void setMessageId(Long messageId) {
+        this.messageId = messageId;
     }
 
     public String getSentFrom() {
@@ -51,6 +44,14 @@ public class Message implements Serializable {
         this.sentFrom = sentFrom;
     }
 
+    public Timestamp getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(Timestamp sendDate) {
+        this.sendDate = sendDate;
+    }
+
     public String getSendText() {
         return sendText;
     }
@@ -59,10 +60,19 @@ public class Message implements Serializable {
         this.sendText = sendText;
     }
 
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
-                "sentFrom='" + sentFrom + '\'' +
+                "messageId=" + messageId +
+                ", sentFrom='" + sentFrom + '\'' +
                 ", sendDate='" + sendDate + '\'' +
                 ", sendText='" + sendText + '\'' +
                 ", recipient='" + recipient + '\'' +

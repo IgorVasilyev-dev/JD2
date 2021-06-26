@@ -16,7 +16,7 @@ public class UserService implements IUserService {
     }
 
     /**
-     * Метод проверяет объект user и добовляет его в userStorage
+     * Метод проверяет объект user и добовляет его в repository
      * @param user объект класса User
      */
     @Override
@@ -62,7 +62,7 @@ public class UserService implements IUserService {
     }
 
     /**
-     * Метод получает объект user из usersStorage по ключу Login
+     * Метод получает объект user из repository по ключу Login
      * @param login ключ
      * @return возвращает объект user
      */
@@ -72,21 +72,15 @@ public class UserService implements IUserService {
     }
 
     /**
-     * Метод получает список usersLogin из usersStorage
-     * @return список usersLogin
+     * Метод получает список allUsersLogin из repository
+     * @return список allUsersLogin
      */
     @Override
     public HashSet<String> getAllLogin () {
-        System.out.println("получаем gellAllLogin");
         if(allUsersLogin == null || allUsersLogin.isEmpty()) {
-            System.out.println("мы в IF");
-            System.out.println(repository.findAll());
             for (User user : repository.findAll()) {
-                System.out.println("мы в форе");
-                System.out.println("user = " + user.getLogin());
                 allUsersLogin.add(user.getLogin());
             }
-            System.out.println("allUsersLogin = " + allUsersLogin);
             return allUsersLogin;
         }
        return allUsersLogin;
